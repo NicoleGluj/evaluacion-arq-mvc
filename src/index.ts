@@ -65,7 +65,7 @@ app.get("/status", (req, res) => {
 })
 
 
-app.use("/products", productRouter)
+app.use("/books", productRouter)
 
 connectDB()
   .then(() => {

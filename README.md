@@ -95,11 +95,11 @@ npm run dev
 
 Usar las siguientes rutas:
 
-- `GET http://localhost:3000/products`
-- `POST http://localhost:3000/products`
-- `GET http://localhost:3000/products/:id`
-- `PUT http://localhost:3000/products/:id`
-- `DELETE http://localhost:3000/products/:id`
+- `GET http://localhost:3000/books`
+- `POST http://localhost:3000/books`
+- `GET http://localhost:3000/books/:id`
+- `PUT http://localhost:3000/books/:id`
+- `DELETE http://localhost:3000/books/:id`
 
 ---
 
