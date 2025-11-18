@@ -42,7 +42,7 @@ app.use(
   })
 )
 
-app.get("status", (req, res) => {
+app.get("/status", (req, res) => {
   const dbState = mongoose.connection.readyState
 
   if (dbState !== 1) {

@@ -6,14 +6,14 @@ class ProductController {
   static getAllProducts = async (req: Request, res: Response) => {
     try {
       const products = await Product.find()
-      res.status(200).json({ success: true, data: products })
+      return res.status(200).json({ success: true, data: products })
     } catch (e) {
       const error = e as Error
-      res.json({ success: false, error: error.message })
+      return res.json({ success: false, error: error.message })
     }
   }
 
-  static getProducts = async (req: Request, res: Response) => {
+  static getProduct = async (req: Request, res: Response) => {
     try {
       const { id } = req.params
 
@@ -30,28 +30,28 @@ class ProductController {
         return res.status(404).json({ success: false, error: "No se encontro el producto" })
       }
 
-      res.status(200).json({ success: true, data: product })
+      return res.status(200).json({ success: true, data: product })
 
     } catch (e) {
       const error = e as Error
-      res.status(500).json({ success: false, error: error.message })
+      return res.status(500).json({ success: false, error: error.message })
     }
   }
 
   static addProduct = async (req: Request, res: Response) => {
     try {
       const { body } = req
-      const { title, author, publishedYear, genre, avaiable } = body
+      const { title, author, publishedYear, genre, available } = body
 
-      if (!title || !author || !publishedYear || !genre || !avaiable) {
-        return res.status(400).json({ success: false, error: "Datos invalidos" })
+      if (!title || !author) {
+        return res.status(400).json({ success: false, error: "Título y autor son requeridos" })
       }
 
-      const newProduct = new Product({ title, author, publishedYear, genre, avaiable })
+      const newProduct = new Product({ title, author, publishedYear, genre, available })
 
       await newProduct.save()
 
-      return res.status(201).json({ success: true, data: newProduct });
+      return res.status(201).json({ success: true, data: newProduct, message: "Producto creado" });
     } catch (e) {
       const error = e as Error
       return res.status(500).json({ success: false, error: error.message })
@@ -62,7 +62,7 @@ class ProductController {
     try {
       const { id } = req.params
       const { body } = req
-      const { title, author, publishedYear, genre, avaiable } = body
+      const { title, author, publishedYear, genre, available } = body
 
       if (!id) {
         return res.status(400).json({ success: false, error: "ID requerido" })
@@ -72,19 +72,19 @@ class ProductController {
         return res.status(400).json({ success: false, error: "ID invalido" })
       }
 
-      const updates = { title, author, publishedYear, genre, avaiable }
+      const updates = { title, author, publishedYear, genre, available }
 
-      const updateProduct = await Product.findByIdAndUpdate(id, updates, { new: true })
+      const updatedProduct = await Product.findByIdAndUpdate(id, updates, { new: true })
 
-      if (!updateProduct) {
+      if (!updatedProduct) {
         return res.status(404).json({ success: false, error: "Producto no encontrado" })
       }
 
-      return res.status(200).json({ success: true, data: updateProduct })
+      return res.status(200).json({ success: true, data: updatedProduct })
 
     } catch (e) {
       const error = e as Error
-      res.status(500).json({ success: false, error: error.message })
+      return res.status(500).json({ success: false, error: error.message })
     }
   }
 
@@ -106,10 +106,10 @@ class ProductController {
         return res.status(404).json({ success: false, error: "Producto no encontrado" })
       }
 
-      res.status(200).json({ succes: true, data: deleteProduct })
+      res.status(200).json({ success: true, data: deleteProduct })
     } catch (e) {
       const error = e as Error
-      res.status(500).json({ success: false, error: error.message })
+      return res.status(500).json({ success: false, error: error.message })
     }
   }
 }

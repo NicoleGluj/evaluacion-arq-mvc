@@ -6,7 +6,7 @@ const ProductSchema = new Schema<IProduct>({
   author: { type: String, required: true },
   publishedYear: { type: Number, required: false },
   genre: { type: String, required: false },
-  avaiable: { type: Boolean, default: true }
+  available: { type: Boolean, default: true }
 })
 
 const Product = mongoose.model<IProduct>("Product", ProductSchema)

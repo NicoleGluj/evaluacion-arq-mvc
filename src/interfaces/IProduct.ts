@@ -3,5 +3,5 @@ export interface IProduct {
   author: string,
   publishedYear: number,
   genre: string,
-  avaiable: boolean
+  available: boolean
 }

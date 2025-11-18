@@ -4,7 +4,7 @@ import ProductController from "../controllers/productController";
 const productRouter = Router()
 
 productRouter.get("/", ProductController.getAllProducts)
-productRouter.get("/:id", ProductController.getProducts)
+productRouter.get("/:id", ProductController.getProduct)
 productRouter.post("/", ProductController.addProduct)
 productRouter.patch("/:id", ProductController.updateProduct)
 productRouter.delete("/:id", ProductController.deleteProduct)
