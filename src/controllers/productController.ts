@@ -47,6 +47,14 @@ class ProductController {
         return res.status(400).json({ success: false, error: "Título y autor son requeridos" })
       }
 
+      if (typeof title !== "string" || title.trim() === "") {
+        return res.status(400).json({ success: false, error: "Título inválido" });
+      }
+
+      if (typeof author !== "string" || author.trim() === "") {
+        return res.status(400).json({ success: false, error: "Autor inválido" });
+      }
+
       const newProduct = new Product({ title, author, publishedYear, genre, available })
 
       await newProduct.save()
