@@ -5,6 +5,7 @@ import fs from "node:fs"
 import morgan from "morgan"
 import mongoose from "mongoose"
 import { connectDB } from "./config/mongodb"
+import productRouter from "./routes/productRoutes"
 
 process.loadEnvFile()
 
@@ -63,7 +64,8 @@ app.get("status", (req, res) => {
   })
 })
 
-// app.use("/produt")
+
+app.use("/products", productRouter)
 
 connectDB()
   .then(() => {
